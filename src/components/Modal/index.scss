@@ -1,0 +1,28 @@
+.modal-outer-container {
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	pointer-events: none;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+}
+
+.modal-inner-container {
+	position: fixed;
+	top: 30%;
+	height: max-content;
+	opacity: 1 !important;
+	background-color: #222222;
+	z-index: 3;
+	pointer-events: visible;
+}
+
+.close-icon {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	cursor: pointer;
+}
