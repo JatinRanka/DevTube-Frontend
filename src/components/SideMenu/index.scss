@@ -1,63 +1,63 @@
 .side-menu-container {
-	background-color: rgba(0, 0, 0, 0.4);
-	height: 100%;
-	width: 100%;
-	position: fixed;
-	top: 0rem;
-	left: 0rem;
-	z-index: 3;
+  background-color: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0rem;
+  left: 0rem;
+  z-index: 3;
 
-	.side-menu-inner-container {
-		width: 100%;
-		opacity: 1 !important;
-		height: 100%;
-		background-color: #222;
-		padding-top: 3rem;
-		padding-left: 1rem;
-		position: relative;
-	}
+  .side-menu-inner-container {
+    width: 100%;
+    opacity: 1 !important;
+    height: 100%;
+    background-color: #222;
+    padding-top: 3rem;
+    padding-left: 1rem;
+    position: relative;
+  }
 
-	.side-menu-close {
-		position: absolute;
-		top: 1rem;
-		right: 0rem;
-		cursor: pointer;
-	}
+  .side-menu-close {
+    position: absolute;
+    top: 1rem;
+    right: 0rem;
+    cursor: pointer;
+  }
 
-	.side-menu-item {
-		display: flex;
-		align-items: center;
-		justify-content: flex-start;
-		margin: 2rem 1rem;
-		cursor: pointer;
-	}
+  .side-menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 2rem 1rem;
+    cursor: pointer;
+  }
 
-	.side-menu-item:hover,
-	.side-menu-item:visited,
-	.side-menu-item:link,
-	.side-menu-item:active {
-		color: var(--primary-text-color);
-		text-decoration: none;
-	}
+  .side-menu-item:hover,
+  .side-menu-item:visited,
+  .side-menu-item:link,
+  .side-menu-item:active {
+    color: var(--primary-text-color);
+    text-decoration: none;
+  }
 
-	.side-menu-item-icon {
-		font-size: 2rem;
-		margin-right: 1rem;
-	}
+  .side-menu-item-icon {
+    font-size: 2rem;
+    margin-right: 1rem;
+  }
 
-	.side-menu-item-text {
-		font-size: 1.5rem;
-		text-transform: capitalize;
-	}
+  .side-menu-item-text {
+    font-size: 1.5rem;
+    text-transform: capitalize;
+  }
 }
 
 @media only screen and (min-width: 768px) {
-	.side-menu-inner-container {
-		max-width: 300px;
-		padding-top: 4rem !important;
-	}
+  .side-menu-inner-container {
+    max-width: 300px;
+    padding-top: 4rem !important;
+  }
 
-	.side-menu-item {
-		margin: 2rem 1rem !important;
-	}
+  .side-menu-item {
+    margin: 2rem 1rem !important;
+  }
 }
