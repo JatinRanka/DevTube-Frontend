@@ -35,6 +35,7 @@ const PlaylistsPage = () => {
       ?.value;
 
     console.log({ playlistId });
+
     dispatchPlaylist({
       type: DELETE_PLAYLIST,
       payload: {
