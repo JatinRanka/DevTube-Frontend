@@ -18,6 +18,8 @@ const SavePlaylistModal = ({ showModal, handleCloseModal, videoDetails }) => {
   } = usePlaylistContext();
 
   const handleAddPlaylistAndSave = () => {
+    if (!newPlaylistName) return;
+
     dispatch({
       type: ADD_PLAYLIST,
       payload: {
