@@ -5,6 +5,8 @@ import SavePlaylistModal from "../SaveVideoModal";
 import { doesVideoExistsInAnyPlaylist, isVideoLiked } from "../../helper";
 import { TOGGLE_LIKE_VIDEO, usePlaylistContext } from "../../context/playlist";
 
+const MAX_VIDEOS_TO_DISPLAY_IN_LIST = 6;
+
 const VideoPageComponent = ({ videoDetails, videosList }) => {
   const [showSavePlaylistsModal, setShowSavePlaylistsModal] = useState(false);
 
@@ -118,9 +120,13 @@ const VideoPageComponent = ({ videoDetails, videosList }) => {
       <div className="videos-list">
         <h3 className="w-100">Similar</h3>
 
-        {videosList.map((videoDetails) => (
-          <VideoCard key={videoDetails._id} videoDetails={videoDetails} />
-        ))}
+        {videosList
+          .slice(0, MAX_VIDEOS_TO_DISPLAY_IN_LIST)
+          .map((videoDetails) => {
+            return (
+              <VideoCard key={videoDetails._id} videoDetails={videoDetails} />
+            );
+          })}
       </div>
     </div>
   );
