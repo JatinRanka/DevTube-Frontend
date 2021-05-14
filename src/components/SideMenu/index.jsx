@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { NavLink } from 'react-router-dom';
 import { usePlaylistContext } from '../../context/playlist';
-import { getLikedVideosPlaylist } from '../../helper';
+import { getLikedVideosPlaylist, getWatchLaterPlaylist } from '../../helper';
 import './index.scss';
 
 const SideMenu = ({ showSideMenu, handleCloseSideMenu }) => {
@@ -10,6 +10,7 @@ const SideMenu = ({ showSideMenu, handleCloseSideMenu }) => {
 		state: { playlists }
 	} = usePlaylistContext();
 	const { _id: likedVideosPlaylistId } = getLikedVideosPlaylist({ playlists });
+	const { _id: watchLaterPlaylistId } = getWatchLaterPlaylist({ playlists });
 
 	const sideMenuItems = [
 		{ displayName: 'home', iconName: 'home', to: '/' },
@@ -18,6 +19,11 @@ const SideMenu = ({ showSideMenu, handleCloseSideMenu }) => {
 			displayName: 'Liked Videos',
 			iconName: 'recommend',
 			to: `/playlists/${likedVideosPlaylistId}`
+		},
+		{
+			displayName: 'Watch Later',
+			iconName: 'watch_later',
+			to: `/playlists/${watchLaterPlaylistId}`
 		}
 	];
 

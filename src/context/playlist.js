@@ -1,11 +1,11 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import faker from 'faker';
-import { isVideoInPlaylist } from '../helper';
 import { LIKED_VIDEOS, WATCH_LATER } from '../constants';
 
 export const ADD_VIDEO_IN_PLAYLIST = 'ADD_VIDEO_IN_PLAYLIST';
 export const REMOVE_VIDEO_FROM_PLAYLIST = 'REMOVE_VIDEO_FROM_PLAYLIST';
 export const TOGGLE_LIKE_VIDEO = 'TOGGLE_LIKE_VIDEO';
+export const TOGGLE_WATCH_LATER = 'TOGGLE_WATCH_LATER';
 export const ADD_PLAYLIST = 'ADD_PLAYLIST';
 export const DELETE_PLAYLIST = 'DELETE_PLAYLIST';
 

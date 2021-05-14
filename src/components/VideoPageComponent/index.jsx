@@ -2,8 +2,18 @@ import React, { useState } from 'react';
 import ReactPlayer from 'react-player/youtube';
 import VideoCard from '../VideoCard';
 import SavePlaylistModal from '../SaveVideoModal';
-import { doesVideoExistsInAnyPlaylist, isVideoLiked } from '../../helper';
-import { TOGGLE_LIKE_VIDEO, usePlaylistContext } from '../../context/playlist';
+import {
+	doesVideoExistsInAnyPlaylist,
+	getWatchLaterPlaylist,
+	isVideoInWatchLater,
+	isVideoLiked
+} from '../../helper';
+import {
+	ADD_VIDEO_IN_PLAYLIST,
+	REMOVE_VIDEO_FROM_PLAYLIST,
+	TOGGLE_LIKE_VIDEO,
+	usePlaylistContext
+} from '../../context/playlist';
 
 const MAX_VIDEOS_TO_DISPLAY_IN_LIST = 6;
 
@@ -28,6 +38,22 @@ const VideoPageComponent = ({ videoDetails, videosList }) => {
 					payload: {
 						video: { ...videoDetails },
 						likeVideo: isVideoLiked({ videoId, playlists }) ? false : true
+					}
+				});
+			}
+		},
+		{
+			displayName: 'Watch Later',
+			iconName: 'watch_later',
+			active: isVideoInWatchLater({ videoId, playlists }),
+			onClick: () => {
+				dispatch({
+					type: isVideoInWatchLater({ videoId, playlists })
+						? REMOVE_VIDEO_FROM_PLAYLIST
+						: ADD_VIDEO_IN_PLAYLIST,
+					payload: {
+						video: { ...videoDetails },
+						playlistId: getWatchLaterPlaylist({ playlists })._id
 					}
 				});
 			}

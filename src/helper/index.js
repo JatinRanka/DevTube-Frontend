@@ -1,4 +1,4 @@
-import { LIKED_VIDEOS } from '../constants';
+import { LIKED_VIDEOS, WATCH_LATER } from '../constants';
 
 export const isVideoInPlaylist = ({ videoId: videoIdToCheck, playlist }) => {
 	const { listOfVideos } = playlist;
@@ -18,6 +18,16 @@ export const isVideoLiked = ({ videoId: videoIdToCheck, playlists }) => {
 
 export const getLikedVideosPlaylist = ({ playlists }) => {
 	return playlists.find((playlist) => playlist.category === LIKED_VIDEOS);
+};
+
+export const getWatchLaterPlaylist = ({ playlists }) => {
+	return playlists.find((playlist) => playlist.category === WATCH_LATER);
+};
+
+export const isVideoInWatchLater = ({ videoId: videoIdToCheck, playlists }) => {
+	const playlist = getWatchLaterPlaylist({ playlists });
+	const { listOfVideos } = playlist;
+	return listOfVideos.find((video) => videoIdToCheck == video._id);
 };
 
 export const doesVideoExistsInAnyPlaylist = ({ videoId: videoIdToCheck, playlists }) => {
