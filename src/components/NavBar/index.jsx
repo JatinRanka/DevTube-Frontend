@@ -25,7 +25,7 @@ const NavBar = () => {
 					<span class="material-icons menu-icon">menu</span>
 				</button>
 
-				<Link to="/">
+				<Link to="/" className="reset-link-styles">
 					<p className="heading-4 navbar__logo">DevTube</p>
 				</Link>
 			</div>

@@ -25,7 +25,7 @@ const SideMenu = ({ showSideMenu, handleCloseSideMenu }) => {
 					return (
 						<NavLink
 							to={sideMenuItem.to}
-							className="side-menu-item"
+							className="side-menu-item reset-link-styles"
 							activeClassName="active"
 							exact
 						>

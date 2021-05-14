@@ -30,14 +30,7 @@
 		justify-content: flex-start;
 		margin: 2rem 1rem;
 		cursor: pointer;
-	}
-
-	.side-menu-item:hover,
-	.side-menu-item:visited,
-	.side-menu-item:link,
-	.side-menu-item:active {
 		color: var(--primary-text-color);
-		text-decoration: none;
 	}
 
 	.side-menu-item-icon {

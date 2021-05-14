@@ -44,7 +44,7 @@ const VideoCard = ({ videoDetails }) => {
 	};
 
 	return (
-		<Link to={`/videos/${_id}`}>
+		<Link to={`/videos/${_id}`} className="reset-link-styles">
 			<div className="video-card" style={{ width: `${dimensions.width}px` }}>
 				<ReactPlayer
 					className="react-player"
