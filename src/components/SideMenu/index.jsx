@@ -1,15 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { usePlaylistContext } from '../../context/playlist';
+import { getLikedVideosPlaylist } from '../../helper';
 import './index.scss';
 
-const sideMenuItems = [
-	{ textName: 'home', iconName: 'home', to: '/' },
-	{ textName: 'library', iconName: 'video_library', to: '/playlists' },
-	{ textName: 'subscriptions', iconName: 'subscriptions', to: '/' }
-];
-
 const SideMenu = ({ showSideMenu, handleCloseSideMenu }) => {
+	const {
+		state: { playlists }
+	} = usePlaylistContext();
+	const { _id: likedVideosPlaylistId } = getLikedVideosPlaylist({ playlists });
+
+	const sideMenuItems = [
+		{ displayName: 'home', iconName: 'home', to: '/' },
+		{ displayName: 'library', iconName: 'video_library', to: '/playlists' },
+		{
+			displayName: 'Liked Videos',
+			iconName: 'video_library',
+			to: `/playlists/${likedVideosPlaylistId}`
+		}
+	];
+
 	if (!showSideMenu) return null;
 
 	return ReactDOM.createPortal(
@@ -29,10 +40,12 @@ const SideMenu = ({ showSideMenu, handleCloseSideMenu }) => {
 							activeClassName="active"
 							exact
 						>
-							<span class="material-icons material-icons-round side-menu-item-icon">
+							<span class="material-icons side-menu-item-icon">
 								{sideMenuItem.iconName}
 							</span>
-							<p className="side-menu-item-text">{sideMenuItem.textName}</p>
+							<p className="side-menu-item-text">
+								{sideMenuItem.displayName}
+							</p>
 						</NavLink>
 					);
 				})}

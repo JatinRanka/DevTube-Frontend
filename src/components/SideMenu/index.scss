@@ -7,6 +7,11 @@
 	left: 0rem;
 	z-index: 3;
 
+	.active .side-menu-item-text {
+		border-bottom: solid;
+		font-weight: 800;
+	}
+
 	.side-menu-inner-container {
 		width: 100%;
 		opacity: 1 !important;
