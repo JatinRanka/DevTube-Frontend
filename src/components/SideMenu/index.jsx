@@ -17,7 +17,7 @@ const SideMenu = ({ showSideMenu, handleCloseSideMenu }) => {
 		{ displayName: 'library', iconName: 'video_library', to: '/playlists' },
 		{
 			displayName: 'Liked Videos',
-			iconName: 'recommend',
+			iconName: 'thumb_up',
 			to: `/playlists/${likedVideosPlaylistId}`
 		},
 		{

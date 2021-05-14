@@ -30,7 +30,7 @@ const VideoPageComponent = ({ videoDetails, videosList }) => {
 	const videoActionButtons = [
 		{
 			displayName: 'Like',
-			iconName: 'recommend',
+			iconName: 'thumb_up',
 			active: isVideoLiked({ videoId, playlists }),
 			onClick: () => {
 				dispatch({
