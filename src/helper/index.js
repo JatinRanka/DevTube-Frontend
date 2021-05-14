@@ -1,12 +1,17 @@
+import { LIKED_VIDEOS } from '../constants';
+
 export const isVideoInPlaylist = ({ videoId: videoIdToCheck, playlist }) => {
 	const { listOfVideos } = playlist;
 	return listOfVideos.find((video) => videoIdToCheck == video._id);
 };
 
+/*
+	To check if a video is liked or not, pass all playlists,
+	Then find the LIKED_VIDEOS playlist from the list of playlists.
+	Then check if the video exists in LIKED_VIDEOS playlist or not.
+*/
 export const isVideoLiked = ({ videoId: videoIdToCheck, playlists }) => {
-	const playlist = playlists.find(
-		(playlist) => playlist.name.toLowerCase() === 'liked videos'
-	);
+	const playlist = playlists.find((playlist) => playlist.category === LIKED_VIDEOS);
 	const { listOfVideos } = playlist;
 	return listOfVideos.find((video) => videoIdToCheck == video._id);
 };

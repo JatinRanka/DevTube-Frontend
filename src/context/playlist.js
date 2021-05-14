@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import faker from 'faker';
 import { isVideoInPlaylist } from '../helper';
+import { LIKED_VIDEOS, WATCH_LATER } from '../constants';
 
 export const ADD_VIDEO_IN_PLAYLIST = 'ADD_VIDEO_IN_PLAYLIST';
 export const REMOVE_VIDEO_FROM_PLAYLIST = 'REMOVE_VIDEO_FROM_PLAYLIST';
@@ -60,8 +61,6 @@ const playListReducer = (state, action) => {
 				return updatedPlaylist;
 			});
 
-			console.log({ ...state, playlists: [...updatedPlaylists] });
-
 			return {
 				...state,
 				playlists: [...updatedPlaylists]
@@ -72,7 +71,7 @@ const playListReducer = (state, action) => {
 			const { video: videoToToggle, likeVideo } = payload;
 
 			const updatedPlaylists = playlists.map((playlist) => {
-				if (playlist.name.toLowerCase() != 'liked videos') {
+				if (playlist.category !== LIKED_VIDEOS) {
 					return playlist;
 				}
 
@@ -91,8 +90,6 @@ const playListReducer = (state, action) => {
 						)
 					};
 				}
-				console.log({ videoToToggle });
-				console.log({ updatedPlaylist });
 
 				return updatedPlaylist;
 			});
@@ -135,15 +132,21 @@ const playListReducer = (state, action) => {
 
 const playListProviderInitialState = {
 	playlists: [
-		{ _id: faker.datatype.uuid(), name: 'Liked videos', listOfVideos: [] },
-		{ _id: faker.datatype.uuid(), name: 'Watch Later', listOfVideos: [] },
-		{ _id: faker.datatype.uuid(), name: 'Action', listOfVideos: [] },
-		{ _id: faker.datatype.uuid(), name: 'Comedy', listOfVideos: [] },
 		{
 			_id: faker.datatype.uuid(),
-			name: 'Motivational Songs',
-			listOfVideos: []
+			name: 'Liked videos',
+			listOfVideos: [],
+			category: LIKED_VIDEOS
 		},
+		{
+			_id: faker.datatype.uuid(),
+			name: 'Watch Later',
+			listOfVideos: [],
+			category: WATCH_LATER
+		},
+		{ _id: faker.datatype.uuid(), name: 'Action', listOfVideos: [] },
+		{ _id: faker.datatype.uuid(), name: 'Comedy', listOfVideos: [] },
+		{ _id: faker.datatype.uuid(), name: 'Motivational Songs', listOfVideos: [] },
 		{ _id: faker.datatype.uuid(), name: 'Workout', listOfVideos: [] }
 	]
 };
