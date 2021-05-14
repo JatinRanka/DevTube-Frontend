@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ReactPlayer from 'react-player/youtube';
 import VideoCard from '../VideoCard';
 import SavePlaylistModal from '../SaveVideoModal';
