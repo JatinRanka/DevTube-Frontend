@@ -16,6 +16,10 @@ export const isVideoLiked = ({ videoId: videoIdToCheck, playlists }) => {
 	return listOfVideos.find((video) => videoIdToCheck == video._id);
 };
 
+export const getLikedVideosPlaylist = ({ playlists }) => {
+	return playlists.find((playlist) => playlist.category === LIKED_VIDEOS);
+};
+
 export const doesVideoExistsInAnyPlaylist = ({ videoId: videoIdToCheck, playlists }) => {
 	for (let index in playlists) {
 		if (isVideoInPlaylist({ videoId: videoIdToCheck, playlist: playlists[index] }))
