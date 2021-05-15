@@ -33,17 +33,18 @@ const SideMenu = ({ showSideMenu, handleCloseSideMenu }) => {
 		<div className="side-menu-container">
 			<div className="side-menu-inner-container">
 				<div className="side-menu-close" onClick={handleCloseSideMenu}>
-					<span class="material-icons material-icons-round side-menu-item-icon">
+					<span class="material-icons material-icons-round side-menu-item-icon side-menu-close-icon">
 						close
 					</span>
 				</div>
 
-				{sideMenuItems.map((sideMenuItem) => {
+				{sideMenuItems.map((sideMenuItem, index) => {
 					return (
 						<NavLink
 							to={sideMenuItem.to}
 							className="side-menu-item reset-link-styles"
 							activeClassName="active"
+							key={index}
 							exact
 						>
 							<span class="material-icons side-menu-item-icon">
