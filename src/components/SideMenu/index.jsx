@@ -33,7 +33,7 @@ const SideMenu = ({ showSideMenu, handleCloseSideMenu }) => {
 		<div className="side-menu-container">
 			<div className="side-menu-inner-container">
 				<div className="side-menu-close" onClick={handleCloseSideMenu}>
-					<span class="material-icons material-icons-round side-menu-item-icon side-menu-close-icon">
+					<span className="material-icons material-icons-round side-menu-item-icon side-menu-close-icon">
 						close
 					</span>
 				</div>
@@ -47,7 +47,7 @@ const SideMenu = ({ showSideMenu, handleCloseSideMenu }) => {
 							key={index}
 							exact
 						>
-							<span class="material-icons side-menu-item-icon">
+							<span className="material-icons side-menu-item-icon">
 								{sideMenuItem.iconName}
 							</span>
 							<p className="side-menu-item-text">

@@ -8,7 +8,7 @@ const Modal = ({ showModal, handleCloseModal, children }) => {
 	return ReactDOM.createPortal(
 		<div className="modal-outer-container">
 			<div className="modal-inner-container">
-				<span class="material-icons close-icon" onClick={handleCloseModal}>
+				<span className="material-icons close-icon" onClick={handleCloseModal}>
 					close
 				</span>
 				{children}

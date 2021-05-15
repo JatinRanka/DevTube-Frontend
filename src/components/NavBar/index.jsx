@@ -22,7 +22,7 @@ const NavBar = () => {
 			/>
 			<div className="navbar__left">
 				<button className="menu-btn" onClick={handleShowSideMenu}>
-					<span class="material-icons menu-icon">menu</span>
+					<span className="material-icons menu-icon">menu</span>
 				</button>
 
 				<Link to="/" className="reset-link-styles">

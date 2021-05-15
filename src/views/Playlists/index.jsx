@@ -55,7 +55,7 @@ const PlaylistsPage = () => {
 						>
 							<div className="thumbnail-container">
 								<div className="play-icon-container">
-									<span class="material-icons play-icon">
+									<span className="material-icons play-icon">
 										play_arrow
 									</span>
 								</div>
@@ -73,9 +73,9 @@ const PlaylistsPage = () => {
 								<button
 									data-playlistId={playlist._id}
 									onClick={handleDeletePlaylist}
-									class="btn primary-btn icon-only-btn icon-only-btn-sm delete-btn"
+									className="btn primary-btn icon-only-btn icon-only-btn-sm delete-btn"
 								>
-									<span class="icon material-icons">delete</span>
+									<span className="icon material-icons">delete</span>
 								</button>
 							</div>
 						</Link>
