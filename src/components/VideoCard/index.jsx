@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player/youtube';
 import { Link } from 'react-router-dom';
+import { buildYoutubeVideoUrl } from '../../helper';
 import './index.scss';
 
 const getCalculatedWidth = () => (window.innerWidth < 500 ? window.innerWidth : 300);
@@ -32,7 +33,9 @@ const VideoCard = ({ videoDetails }) => {
 		};
 	}, []);
 
-	const { _id, title, channelName, createdAt, url } = videoDetails;
+	const { _id, title, youtubeId, postedBy } = videoDetails;
+	const url = buildYoutubeVideoUrl(youtubeId);
+
 	const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
 	const onMouseEnter = () => {
@@ -68,7 +71,7 @@ const VideoCard = ({ videoDetails }) => {
 					<div className="description">
 						<h3 className="video-card__description-title">{title}</h3>
 						<span className="video-card__description-small-text">
-							{channelName}| 302K Views | 4 days ago
+							{postedBy.name} | 302K Views | 4 days ago
 						</span>
 					</div>
 				</div>

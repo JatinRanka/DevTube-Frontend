@@ -8,10 +8,10 @@ import './index.scss';
 const THUMBNAIL_PLACEHOLDER = 'https://via.placeholder.com/1920x1080/eee?text=16:9';
 
 const getPlaylistFirstVideoThumbnail = ({ playlist }) => {
-	const url = playlist?.listOfVideos[0]?.url;
-	if (!url) return null;
+	const youtubeId = playlist?.listOfVideos[0]?.youtubeId;
+	if (!youtubeId) return null;
 
-	const thumbnail = getYoutubeThumbnail({ url });
+	const thumbnail = getYoutubeThumbnail(youtubeId);
 
 	return thumbnail;
 };

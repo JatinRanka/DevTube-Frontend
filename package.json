@@ -17,7 +17,7 @@
     "react-transition-group": "^4.4.1"
   },
   "devDependencies": {
-    "prettier": "^2.2.1"
+    "prettier": "^2.3.1"
   },
   "scripts": {
     "start": "react-scripts start",

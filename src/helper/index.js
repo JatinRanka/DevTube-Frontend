@@ -38,11 +38,8 @@ export const doesVideoExistsInAnyPlaylist = ({ videoId: videoIdToCheck, playlist
 	return false;
 };
 
-export const getYoutubeThumbnail = ({ url }) => {
-	const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
-	const match = url.match(regExp);
-	const videoId = match && match[7].length == 11 ? match[7] : false;
-	const thumbnailUrl = `http://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+export const getYoutubeThumbnail = (youtubeId) =>
+	`http://img.youtube.com/vi/${youtubeId}/mqdefault.jpg`;
 
-	return thumbnailUrl;
-};
+export const buildYoutubeVideoUrl = (youtubeId) =>
+	`https://www.youtube.com/watch?v=${youtubeId}`;
