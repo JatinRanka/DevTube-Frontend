@@ -1,0 +1,26 @@
+.App {
+	height: 100%;
+}
+
+/*
+	ToDo: Dirty hack: Should revisit
+	directly manipulating component library	values
+*/
+.input-container__input-field,
+.input-container:focus {
+	color: white;
+}
+
+.input-container__input-field:focus ~ .input-container__heading {
+	top: -1.25rem;
+	font-size: var(--small-font-size);
+	// color: var(--primary-color);
+	color: white;
+}
+
+.input-container__input-field:focus ~ .input-container__icon,
+.input-container__heading-focus {
+	color: white;
+	// color: var(--primary-color);
+}
+// **component library values ends here**

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player/youtube';
-import Loader from "react-loader-spinner";
+import Loader from 'react-loader-spinner';
 import VideoCard from '../VideoCard';
 import SavePlaylistModal from '../SaveVideoModal';
 import {
@@ -18,15 +18,19 @@ import {
 } from '../../context/playlist';
 import { fetchApi } from '../../helper/fetchApi';
 import { useParams } from 'react-router';
-import './index.scss'
+import './index.scss';
 
 const MAX_VIDEOS_TO_DISPLAY_IN_LIST = 6;
 
 const LoadingComponent = () => {
-	return <div className="loading-icon-container"><Loader type="Oval" color="#FFFFFF" height={60} width={60} /></div>;
+	return (
+		<div className="loading-icon-container">
+			<Loader type="Oval" color="#FFFFFF" height={60} width={60} />
+		</div>
+	);
 };
 
-const VideoPageComponent = ({  videosList }) => {
+const VideoPageComponent = ({ videosList }) => {
 	const [showSavePlaylistsModal, setShowSavePlaylistsModal] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [videoDetails, setVideoDetails] = useState({});
@@ -188,20 +192,22 @@ const VideoPageComponent = ({  videosList }) => {
 						</div>
 					</div>
 
-					<div className="videos-list">
-						<h3 className="w-100">Similar</h3>
+					{videosList.length > 0 && (
+						<div className="videos-list">
+							<h3 className="w-100">Similar</h3>
 
-						{videosList
-							.slice(0, MAX_VIDEOS_TO_DISPLAY_IN_LIST)
-							.map((videoDetails) => {
-								return (
-									<VideoCard
-										key={videoDetails._id}
-										videoDetails={videoDetails}
-									/>
-								);
-							})}
-					</div>
+							{videosList
+								.slice(0, MAX_VIDEOS_TO_DISPLAY_IN_LIST)
+								.map((videoDetails) => {
+									return (
+										<VideoCard
+											key={videoDetails._id}
+											videoDetails={videoDetails}
+										/>
+									);
+								})}
+						</div>
+					)}
 				</div>
 			)}
 		</>

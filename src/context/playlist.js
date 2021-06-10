@@ -2,6 +2,7 @@ import React, { createContext, useContext, useReducer } from 'react';
 import faker from 'faker';
 import { LIKED_VIDEOS, WATCH_LATER } from '../constants';
 
+export const SET_PLAYLIST = 'SET_PLAYLIST';
 export const ADD_VIDEO_IN_PLAYLIST = 'ADD_VIDEO_IN_PLAYLIST';
 export const REMOVE_VIDEO_FROM_PLAYLIST = 'REMOVE_VIDEO_FROM_PLAYLIST';
 export const TOGGLE_LIKE_VIDEO = 'TOGGLE_LIKE_VIDEO';
@@ -20,6 +21,15 @@ const playListReducer = (state, action) => {
 	const { playlists } = state;
 
 	switch (type) {
+		case SET_PLAYLIST: {
+			const { playlists } = payload;
+
+			return {
+				...state,
+				playlists
+			};
+		}
+
 		case ADD_PLAYLIST: {
 			const { name, listOfVideos } = payload;
 			const newPlaylist = {
@@ -130,25 +140,27 @@ const playListReducer = (state, action) => {
 	}
 };
 
+const defaultPLaylists = [
+	{
+		_id: faker.datatype.uuid(),
+		name: 'Liked videos',
+		listOfVideos: [],
+		category: LIKED_VIDEOS
+	},
+	{
+		_id: faker.datatype.uuid(),
+		name: 'Watch Later',
+		listOfVideos: [],
+		category: WATCH_LATER
+	},
+	{ _id: faker.datatype.uuid(), name: 'Action', listOfVideos: [] },
+	{ _id: faker.datatype.uuid(), name: 'Comedy', listOfVideos: [] },
+	{ _id: faker.datatype.uuid(), name: 'Motivational Songs', listOfVideos: [] },
+	{ _id: faker.datatype.uuid(), name: 'Workout', listOfVideos: [] }
+];
+
 const playListProviderInitialState = {
-	playlists: [
-		{
-			_id: faker.datatype.uuid(),
-			name: 'Liked videos',
-			listOfVideos: [],
-			category: LIKED_VIDEOS
-		},
-		{
-			_id: faker.datatype.uuid(),
-			name: 'Watch Later',
-			listOfVideos: [],
-			category: WATCH_LATER
-		},
-		{ _id: faker.datatype.uuid(), name: 'Action', listOfVideos: [] },
-		{ _id: faker.datatype.uuid(), name: 'Comedy', listOfVideos: [] },
-		{ _id: faker.datatype.uuid(), name: 'Motivational Songs', listOfVideos: [] },
-		{ _id: faker.datatype.uuid(), name: 'Workout', listOfVideos: [] }
-	]
+	playlists: []
 };
 
 export const PlayListProvider = ({ children }) => {
