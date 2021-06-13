@@ -22,7 +22,7 @@ const PlayListsView = () => {
 
 	const playlist = playlists.find((playlist) => playlist._id === playlistId);
 
-	return playlist.listOfVideos.length === 0 ? (
+	return (!playlist || playlist.listOfVideos.length) === 0 ? (
 		renderEmptyPlaylistComponent()
 	) : (
 		<VideoPageComponent

@@ -4,11 +4,13 @@ import Loader from 'react-loader-spinner';
 import VideoCard from '../VideoCard';
 import SavePlaylistModal from '../SaveVideoModal';
 import {
+	updateVideoInPlaylist,
 	buildYoutubeVideoUrl,
 	doesVideoExistsInAnyPlaylist,
+	getLikedVideosPlaylist,
 	getWatchLaterPlaylist,
-	isVideoInWatchLater,
-	isVideoLiked
+	checkIsVideoInWatchLater,
+	checkIsVideoLiked
 } from '../../helper';
 import {
 	ADD_VIDEO_IN_PLAYLIST,
@@ -19,6 +21,7 @@ import {
 import { fetchApi } from '../../helper/fetchApi';
 import { useParams } from 'react-router';
 import './index.scss';
+import { toast } from '../../helper/toast';
 
 const MAX_VIDEOS_TO_DISPLAY_IN_LIST = 6;
 
@@ -33,9 +36,11 @@ const LoadingComponent = () => {
 const VideoPageComponent = ({ videosList }) => {
 	const [showSavePlaylistsModal, setShowSavePlaylistsModal] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
+	const [isLikeButtonLoading, setIsLikeButtonLoading] = useState(false);
+	const [isWatchLaterButtonLoading, setIsWatchLaterButtonLoading] = useState(false);
 	const [videoDetails, setVideoDetails] = useState({});
 
-	const { videoId } = useParams();
+	const { videoId = videosList[0]._id } = useParams();
 
 	const fetchVideo = async (videoId) => {
 		try {
@@ -47,7 +52,7 @@ const VideoPageComponent = ({ videosList }) => {
 			setVideoDetails(video);
 			setIsLoading(false);
 		} catch (error) {
-			console.log(error);
+			toast({ type: 'error', message: error.message });
 		}
 	};
 
@@ -67,31 +72,70 @@ const VideoPageComponent = ({ videosList }) => {
 		{
 			displayName: 'Like',
 			iconName: 'thumb_up',
-			active: isVideoLiked({ videoId, playlists }),
-			onClick: () => {
-				dispatch({
-					type: TOGGLE_LIKE_VIDEO,
-					payload: {
-						video: { ...videoDetails },
-						likeVideo: isVideoLiked({ videoId, playlists }) ? false : true
-					}
-				});
+			isLoading: isLikeButtonLoading,
+			active: checkIsVideoLiked({ videoId, playlists }),
+			onClick: async () => {
+				try {
+					setIsLikeButtonLoading(true);
+					const { _id: playlistId } = getLikedVideosPlaylist({ playlists });
+					const isVideoLiked = checkIsVideoLiked({ videoId, playlists });
+
+					// For updating in backend
+					await updateVideoInPlaylist({
+						playlistId,
+						videoId,
+						type: isVideoLiked ? 'REMOVE' : 'ADD'
+					});
+
+					dispatch({
+						type: TOGGLE_LIKE_VIDEO,
+						payload: {
+							video: { ...videoDetails },
+							likeVideo: isVideoLiked ? false : true
+						}
+					});
+				} catch (error) {
+					toast({ type: 'error', message: error.message });
+				} finally {
+					setIsLikeButtonLoading(false);
+				}
 			}
 		},
 		{
 			displayName: 'Watch Later',
 			iconName: 'watch_later',
-			active: isVideoInWatchLater({ videoId, playlists }),
-			onClick: () => {
-				dispatch({
-					type: isVideoInWatchLater({ videoId, playlists })
-						? REMOVE_VIDEO_FROM_PLAYLIST
-						: ADD_VIDEO_IN_PLAYLIST,
-					payload: {
-						video: { ...videoDetails },
-						playlistId: getWatchLaterPlaylist({ playlists })._id
-					}
-				});
+			isLoading: isWatchLaterButtonLoading,
+			active: checkIsVideoInWatchLater({ videoId, playlists }),
+			onClick: async () => {
+				try {
+					setIsWatchLaterButtonLoading(true);
+					const { _id: playlistId } = getWatchLaterPlaylist({ playlists });
+					const isVideoInWatchLater = checkIsVideoInWatchLater({
+						videoId,
+						playlists
+					});
+
+					// For updating in backend
+					await updateVideoInPlaylist({
+						playlistId,
+						videoId,
+						type: isVideoInWatchLater ? 'REMOVE' : 'ADD'
+					});
+
+					dispatch({
+						type: isVideoInWatchLater
+							? REMOVE_VIDEO_FROM_PLAYLIST
+							: ADD_VIDEO_IN_PLAYLIST,
+						payload: {
+							video: { ...videoDetails },
+							playlistId
+						}
+					});
+				} catch (error) {
+					toast({ type: 'error', message: error.message });
+				} finally {
+					setIsWatchLaterButtonLoading(false);
+				}
 			}
 		},
 		{ displayName: 'Share', iconName: 'share' },
@@ -137,10 +181,15 @@ const VideoPageComponent = ({ videosList }) => {
 							<p className="views">302K Views</p>
 
 							<div className="video-action-buttons">
-								{videoActionButtons.map((videoActionButton) => {
+								{videoActionButtons.map((videoActionButton, index) => {
 									return (
 										<div
-											className="button"
+											className={`button ${
+												videoActionButton.isLoading
+													? 'disabled'
+													: ''
+											}`}
+											key={index}
 											onClick={videoActionButton.onClick}
 										>
 											<span

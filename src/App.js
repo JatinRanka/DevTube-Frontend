@@ -12,22 +12,36 @@ import './App.scss';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
-import { isUserLoggedIn } from './helper';
+import { fetchUserId, isUserLoggedIn } from './helper';
 import { fetchApi } from './helper/fetchApi';
+import { toast } from './helper/toast';
+import { SET_PLAYLISTS, usePlaylistContext } from './context/playlist';
 
 function App() {
+	const userId = fetchUserId();
+	const { dispatch } = usePlaylistContext();
+
 	const fetchPlaylists = async () => {
 		try {
 			const { playlists } = await fetchApi({
 				url: '/playlists',
 				isProtected: true
 			});
-		} catch (error) {}
+
+			dispatch({
+				type: SET_PLAYLISTS,
+				payload: {
+					playlists
+				}
+			});
+		} catch (error) {
+			toast({ type: 'error', message: error.message });
+		}
 	};
 
 	useEffect(() => {
-		if (isUserLoggedIn()) fetchPlaylists();
-	}, []);
+		if (userId && isUserLoggedIn()) fetchPlaylists();
+	}, [userId]);
 
 	return (
 		<div className="App">

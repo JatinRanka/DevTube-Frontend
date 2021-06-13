@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { isUserLoggedIn } from '.';
+import { fetchAuthorizationToken, isUserLoggedIn } from '.';
 const API_BASE_ENDPOINT = 'http://localhost:5000/api';
 
 const setAuthorizationToken = (response) => {
@@ -20,7 +20,7 @@ export const fetchApi = async ({
 			method,
 			url: API_BASE_ENDPOINT + url,
 			data,
-			...(isProtected && { headers: { Authorization: '' } })
+			...(isProtected && { headers: { Authorization: fetchAuthorizationToken() } })
 		});
 
 		setAuthorizationToken(response);

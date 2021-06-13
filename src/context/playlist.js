@@ -2,7 +2,7 @@ import React, { createContext, useContext, useReducer } from 'react';
 import faker from 'faker';
 import { LIKED_VIDEOS, WATCH_LATER } from '../constants';
 
-export const SET_PLAYLIST = 'SET_PLAYLIST';
+export const SET_PLAYLISTS = 'SET_PLAYLISTS';
 export const ADD_VIDEO_IN_PLAYLIST = 'ADD_VIDEO_IN_PLAYLIST';
 export const REMOVE_VIDEO_FROM_PLAYLIST = 'REMOVE_VIDEO_FROM_PLAYLIST';
 export const TOGGLE_LIKE_VIDEO = 'TOGGLE_LIKE_VIDEO';
@@ -21,7 +21,7 @@ const playListReducer = (state, action) => {
 	const { playlists } = state;
 
 	switch (type) {
-		case SET_PLAYLIST: {
+		case SET_PLAYLISTS: {
 			const { playlists } = payload;
 
 			return {
