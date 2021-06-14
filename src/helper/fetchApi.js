@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { fetchAuthorizationToken, isUserLoggedIn } from '.';
-const API_BASE_ENDPOINT = 'http://localhost:5000/api';
+const API_BASE_ENDPOINT = 'https://devtube-backend.herokuapp.com/api';
 
 const setAuthorizationToken = (response) => {
 	const authorizationToken = response?.headers?.authorization;
