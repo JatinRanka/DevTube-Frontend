@@ -65,7 +65,10 @@ const VideoCard = ({ videoDetails }) => {
 
 				<div className="video-card__details">
 					<div className="channel-logo">
-						<img src="https://yt3.ggpht.com/ytc/AAUvwnh53ZRIGnyzC28QrfuggCINb3cfNbNWo4Uc6qR9=s100-c-k-c0x00ffffff-no-rj" />
+						<img
+							src="https://yt3.ggpht.com/ytc/AAUvwnh53ZRIGnyzC28QrfuggCINb3cfNbNWo4Uc6qR9=s100-c-k-c0x00ffffff-no-rj"
+							alt={title}
+						/>
 					</div>
 
 					<div className="description">

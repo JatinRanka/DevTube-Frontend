@@ -10,7 +10,6 @@ import {
 import './index.scss';
 import { toast } from '../../helper/toast';
 import { fetchApi } from '../../helper/fetchApi';
-import Loader from 'react-loader-spinner';
 
 const SavePlaylistModal = ({ showModal, handleCloseModal, videoDetails }) => {
 	const [newPlaylistName, setNewPlaylistName] = useState('');
@@ -109,19 +108,22 @@ const SavePlaylistModal = ({ showModal, handleCloseModal, videoDetails }) => {
 				</div>
 				<hr />
 
+				<p className="">Add new playlist</p>
+
 				<div className="input-container">
 					<input
 						className="input-container__input-field"
 						value={newPlaylistName}
 						onChange={(event) => setNewPlaylistName(event.target.value)}
+						placeholder="Enter name"
 					/>
-					<label
+					{/* <label
 						className={`input-container__heading ${
 							newPlaylistName ? ' input-container__heading-filled' : ''
 						}`}
 					>
-						Playlist name
-					</label>
+						New playlist name
+					</label> */}
 				</div>
 
 				<button

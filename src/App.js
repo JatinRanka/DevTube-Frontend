@@ -12,14 +12,14 @@ import './App.scss';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
-import { fetchUserId, isUserLoggedIn } from './helper';
 import { fetchApi } from './helper/fetchApi';
 import { toast } from './helper/toast';
 import { SET_PLAYLISTS, usePlaylistContext } from './context/playlist';
+import { useUserContext } from './context/user';
 
 function App() {
-	const userId = fetchUserId();
 	const { dispatch } = usePlaylistContext();
+	const { isUserLoggedIn } = useUserContext();
 
 	const fetchPlaylists = async () => {
 		try {
@@ -40,8 +40,8 @@ function App() {
 	};
 
 	useEffect(() => {
-		if (userId && isUserLoggedIn()) fetchPlaylists();
-	}, [userId]);
+		if (isUserLoggedIn) fetchPlaylists();
+	}, [isUserLoggedIn]);
 
 	return (
 		<div className="App">

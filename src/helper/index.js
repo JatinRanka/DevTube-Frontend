@@ -3,19 +3,15 @@ import { fetchApi } from './fetchApi';
 
 export const isVideoInPlaylist = ({ videoId: videoIdToCheck, playlist }) => {
 	const { listOfVideos } = playlist;
-	return listOfVideos.find((video) => videoIdToCheck == video._id);
+	return listOfVideos?.find((video) => videoIdToCheck === video._id);
 };
 
 //	To check if a video is liked or not, pass all playlists,
 //	Then find the LIKED_VIDEOS playlist from the list of playlists.
 //	Then check if the video exists in LIKED_VIDEOS playlist or not.
 export const checkIsVideoLiked = ({ videoId: videoIdToCheck, playlists = [] }) => {
-	const playlist = playlists?.find((playlist) => playlist.category === LIKED_VIDEOS);
-
-	if (!playlist) return false;
-
-	const { listOfVideos } = playlist;
-	return listOfVideos.find((video) => videoIdToCheck == video._id);
+	const playlist = getLikedVideosPlaylist({ playlists });
+	return playlist?.listOfVideos?.find((video) => videoIdToCheck === video._id);
 };
 
 export const getLikedVideosPlaylist = ({ playlists }) => {
@@ -28,11 +24,7 @@ export const getWatchLaterPlaylist = ({ playlists }) => {
 
 export const checkIsVideoInWatchLater = ({ videoId: videoIdToCheck, playlists = [] }) => {
 	const playlist = getWatchLaterPlaylist({ playlists });
-
-	if (!playlist) return false;
-
-	const { listOfVideos } = playlist;
-	return listOfVideos.find((video) => videoIdToCheck == video._id);
+	return playlist?.listOfVideos?.find((video) => videoIdToCheck === video._id);
 };
 
 export const doesVideoExistsInAnyPlaylist = ({
@@ -65,10 +57,14 @@ export const buildYoutubeVideoUrl = (youtubeId) =>
 
 export const redirectToHomePage = (history) => history.push('/');
 
-export const isUserLoggedIn = () =>
-	Boolean(localStorage.getItem('userId')) &&
-	Boolean(localStorage.getItem('Authorization'));
+export const redirectToLoginPage = (history) => history.push('/login');
 
 export const fetchUserId = () => localStorage.getItem('userId');
 
 export const fetchAuthorizationToken = () => localStorage.getItem('Authorization');
+
+export const handleLogoutUser = (history, setIsUserLoggedIn) => {
+	localStorage.clear();
+	setIsUserLoggedIn(false);
+	redirectToHomePage(history);
+};

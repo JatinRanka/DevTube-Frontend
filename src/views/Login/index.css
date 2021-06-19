@@ -26,6 +26,8 @@
 
 .new-user-text {
 	margin-top: 1rem;
+	display: flex;
+	justify-content: space-evenly;
 }
 
 @media only screen and (max-width: 500px) {

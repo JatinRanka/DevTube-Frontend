@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import faker from 'faker';
-import { LIKED_VIDEOS, WATCH_LATER } from '../constants';
+import { LIKED_VIDEOS } from '../constants';
 
 export const SET_PLAYLISTS = 'SET_PLAYLISTS';
 export const ADD_VIDEO_IN_PLAYLIST = 'ADD_VIDEO_IN_PLAYLIST';
@@ -60,7 +60,7 @@ const playListReducer = (state, action) => {
 			const { video: videoDetails, playlistId } = payload;
 
 			const updatedPlaylists = playlists.map((playlist) => {
-				if (playlist._id != playlistId) {
+				if (playlist._id !== playlistId) {
 					return playlist;
 				}
 
@@ -96,7 +96,7 @@ const playListReducer = (state, action) => {
 					updatedPlaylist = {
 						...playlist,
 						listOfVideos: playlist.listOfVideos.filter(
-							(video) => video._id != videoToToggle._id
+							(video) => video._id !== videoToToggle._id
 						)
 					};
 				}
@@ -114,16 +114,18 @@ const playListReducer = (state, action) => {
 			const { video: videoDetails, playlistId } = payload;
 
 			const updatedPlaylists = playlists.map((playlist) => {
-				if (playlist._id != playlistId) {
+				if (playlist._id !== playlistId) {
 					return playlist;
 				}
 
 				const updatedPlaylist = {
 					...playlist,
 					listOfVideos: playlist.listOfVideos.filter(
-						(video) => video._id != videoDetails._id
+						(video) => video._id !== videoDetails._id
 					)
 				};
+
+				console.log({ updatedPlaylist });
 				return updatedPlaylist;
 			});
 
@@ -139,25 +141,6 @@ const playListReducer = (state, action) => {
 			};
 	}
 };
-
-const defaultPLaylists = [
-	{
-		_id: faker.datatype.uuid(),
-		name: 'Liked videos',
-		listOfVideos: [],
-		category: LIKED_VIDEOS
-	},
-	{
-		_id: faker.datatype.uuid(),
-		name: 'Watch Later',
-		listOfVideos: [],
-		category: WATCH_LATER
-	},
-	{ _id: faker.datatype.uuid(), name: 'Action', listOfVideos: [] },
-	{ _id: faker.datatype.uuid(), name: 'Comedy', listOfVideos: [] },
-	{ _id: faker.datatype.uuid(), name: 'Motivational Songs', listOfVideos: [] },
-	{ _id: faker.datatype.uuid(), name: 'Workout', listOfVideos: [] }
-];
 
 const playListProviderInitialState = {
 	playlists: []

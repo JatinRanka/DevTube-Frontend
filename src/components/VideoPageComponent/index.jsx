@@ -22,6 +22,7 @@ import { fetchApi } from '../../helper/fetchApi';
 import { useParams } from 'react-router';
 import './index.scss';
 import { toast } from '../../helper/toast';
+import { useUserContext } from '../../context/user';
 
 const MAX_VIDEOS_TO_DISPLAY_IN_LIST = 6;
 
@@ -35,11 +36,11 @@ const LoadingComponent = () => {
 
 const VideoPageComponent = ({ videosList }) => {
 	const [showSavePlaylistsModal, setShowSavePlaylistsModal] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 	const [isLikeButtonLoading, setIsLikeButtonLoading] = useState(false);
 	const [isWatchLaterButtonLoading, setIsWatchLaterButtonLoading] = useState(false);
 	const [videoDetails, setVideoDetails] = useState({});
-
+	const { isUserLoggedIn } = useUserContext();
 	const { videoId = videosList[0]._id } = useParams();
 
 	const fetchVideo = async (videoId) => {
@@ -60,7 +61,7 @@ const VideoPageComponent = ({ videosList }) => {
 		fetchVideo(videoId);
 	}, [videoId]);
 
-	const { title, channelName, description, youtubeId } = videoDetails;
+	const { title, postedBy, description, youtubeId } = videoDetails;
 	const url = buildYoutubeVideoUrl(youtubeId);
 
 	const {
@@ -76,6 +77,8 @@ const VideoPageComponent = ({ videosList }) => {
 			active: checkIsVideoLiked({ videoId, playlists }),
 			onClick: async () => {
 				try {
+					if (!isUserLoggedIn) throw new Error('Please login to continue');
+
 					setIsLikeButtonLoading(true);
 					const { _id: playlistId } = getLikedVideosPlaylist({ playlists });
 					const isVideoLiked = checkIsVideoLiked({ videoId, playlists });
@@ -108,6 +111,8 @@ const VideoPageComponent = ({ videosList }) => {
 			active: checkIsVideoInWatchLater({ videoId, playlists }),
 			onClick: async () => {
 				try {
+					if (!isUserLoggedIn) throw new Error('Please login to continue');
+
 					setIsWatchLaterButtonLoading(true);
 					const { _id: playlistId } = getWatchLaterPlaylist({ playlists });
 					const isVideoInWatchLater = checkIsVideoInWatchLater({
@@ -146,6 +151,8 @@ const VideoPageComponent = ({ videosList }) => {
 				: 'library_add',
 			active: doesVideoExistsInAnyPlaylist({ videoId, playlists }),
 			onClick: () => {
+				if (!isUserLoggedIn)
+					return toast({ type: 'error', message: 'Please login to continue' });
 				setShowSavePlaylistsModal(true);
 			}
 		}
@@ -217,10 +224,11 @@ const VideoPageComponent = ({ videosList }) => {
 								<div className="left">
 									<img
 										className="channel-logo"
+										alt={postedBy.name}
 										src="https://yt3.ggpht.com/ytc/AAUvwnh53ZRIGnyzC28QrfuggCINb3cfNbNWo4Uc6qR9=s100-c-k-c0x00ffffff-no-rj"
 									/>
 									<div className="channel">
-										<p className="channel-name">{channelName}</p>
+										<p className="channel-name">{postedBy.name}</p>
 										<p className="subscribers-text">
 											12.5M subscribers
 										</p>

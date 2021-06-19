@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useUserContext } from '../../context/user';
+import { handleLogoutUser, redirectToLoginPage } from '../../helper';
 import SideMenu from '../SideMenu';
-import './index.css';
+import './index.scss';
 
 const NavBar = () => {
+	const history = useHistory();
+	const { isUserLoggedIn, setIsUserLoggedIn } = useUserContext();
+
 	const [showSideMenu, setShowSideMenu] = useState(false);
 
 	const handleShowSideMenu = () => {
@@ -12,6 +17,12 @@ const NavBar = () => {
 
 	const handleCloseSideMenu = () => {
 		setShowSideMenu(false);
+	};
+
+	const handleAccountContainerClick = () => {
+		isUserLoggedIn
+			? handleLogoutUser(history, setIsUserLoggedIn)
+			: redirectToLoginPage(history);
 	};
 
 	return (
@@ -31,12 +42,16 @@ const NavBar = () => {
 			</div>
 
 			<div className="navbar__right">
-				{/* <div className="icon-with-badge">
-					<span className="icon-with-badge__icon material-icons">
-						favorite_border
-					</span>
-					<span className="badge secondary-badge">24</span>
-				</div> */}
+				<div
+					onClick={handleAccountContainerClick}
+					className="reset-link-styles account-container"
+				>
+					<p>{isUserLoggedIn ? 'Logout' : 'Login'} </p>
+
+					<button class="btn account-btn primary-btn icon-only-btn">
+						<span class="icon material-icons"> account_circle </span>
+					</button>
+				</div>
 			</div>
 		</div>
 	);

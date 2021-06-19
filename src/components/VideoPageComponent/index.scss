@@ -5,3 +5,10 @@
 	justify-content: center;
 	align-items: center;
 }
+
+.video-page {
+	.title,
+	.channel-name {
+		text-transform: capitalize;
+	}
+}

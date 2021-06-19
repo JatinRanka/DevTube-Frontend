@@ -8,7 +8,11 @@ import './index.scss';
 const renderEmptyPlaylistComponent = () => {
 	return (
 		<div className="empty-playlist-container">
-			<img src={empytPlaylistImage} className="empty-playlist-img" />
+			<img
+				src={empytPlaylistImage}
+				alt="Playlist is empty"
+				className="empty-playlist-img"
+			/>
 			<p className="heading-4">Playlist is Empty.</p>
 		</div>
 	);

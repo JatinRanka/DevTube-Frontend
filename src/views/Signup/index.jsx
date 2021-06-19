@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { useUserContext } from '../../context/user';
 import { redirectToHomePage } from '../../helper';
 import { fetchApi } from '../../helper/fetchApi';
 import { toast } from '../../helper/toast';
@@ -12,6 +13,7 @@ const SignUp = () => {
 		email: '',
 		password: ''
 	});
+	const { setIsUserLoggedIn } = useUserContext();
 	const [isSignUpButtonLoading, setIsSignUpButtonLoading] = useState(false);
 
 	const handleSignUp = async (event) => {
@@ -28,6 +30,7 @@ const SignUp = () => {
 			toast({ type: 'success', message });
 
 			window.localStorage.setItem('userId', user._id);
+			setIsUserLoggedIn(true);
 			redirectToHomePage(history);
 		} catch (error) {
 			toast({ type: 'error', message: error.message });
@@ -127,7 +130,9 @@ const SignUp = () => {
 
 				<p className="existing-user-text">
 					Existing User?
-					<Link to="/login">Login</Link>
+					<Link to="/login" className="reset-link-styles">
+						Login
+					</Link>
 				</p>
 			</div>
 		</div>

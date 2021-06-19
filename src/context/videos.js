@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useReducer } from 'react';
-import videosList from '../data';
 
 const VideoContext = createContext();
 

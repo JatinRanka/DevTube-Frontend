@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import VideoCard from '../../components/VideoCard';
 import { SET_VIDEOS, useVideosContext } from '../../context/videos';
+import Loader from 'react-loader-spinner';
 import { fetchApi } from '../../helper/fetchApi';
-import './index.css';
+import './index.scss';
 
 const HomePage = () => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -13,7 +14,6 @@ const HomePage = () => {
 		try {
 			setIsLoading(true);
 			const { videosList } = await fetchApi({ url: '/videos', method: 'get' });
-			console.log({ videosList });
 
 			dispatch({
 				type: SET_VIDEOS,
@@ -33,11 +33,19 @@ const HomePage = () => {
 	}, []);
 
 	return (
-		<div className="videos-list">
-			{videosList.map((videoDetails) => (
-				<VideoCard key={videoDetails._id} videoDetails={videoDetails} />
-			))}
-		</div>
+		<>
+			{isLoading ? (
+				<div className="loading-icon-container">
+					<Loader type="Oval" color="#FFFFFF" height={60} width={60} />
+				</div>
+			) : (
+				<div className="videos-list">
+					{videosList.map((videoDetails) => (
+						<VideoCard key={videoDetails._id} videoDetails={videoDetails} />
+					))}
+				</div>
+			)}
+		</>
 	);
 };
 

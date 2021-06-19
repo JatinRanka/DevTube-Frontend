@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { fetchAuthorizationToken, isUserLoggedIn } from '.';
+import { fetchAuthorizationToken } from '.';
 const API_BASE_ENDPOINT = 'https://devtube-backend.herokuapp.com/api';
 
 const setAuthorizationToken = (response) => {
@@ -14,13 +14,15 @@ export const fetchApi = async ({
 	isProtected = false
 }) => {
 	try {
-		if (isProtected && !isUserLoggedIn()) throw new Error('Login to continue');
+		let token;
+		if (isProtected) token = fetchAuthorizationToken();
+		if (isProtected && !token) throw new Error('Login to continue');
 
 		const response = await axios({
 			method,
 			url: API_BASE_ENDPOINT + url,
 			data,
-			...(isProtected && { headers: { Authorization: fetchAuthorizationToken() } })
+			...(isProtected && { headers: { Authorization: token } })
 		});
 
 		setAuthorizationToken(response);

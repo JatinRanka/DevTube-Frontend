@@ -17,21 +17,20 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		text-transform: capitalize;
 	}
 
 	.delete-btn {
 		border: none;
 	}
 
-	.thumbnail-container {
+	.thumbnail-inner-container {
 		position: relative;
 		width: 100%;
 
 		.thumbnail-img {
-			width: 100%;
-			// Using width variable as react build throws error on using calc width directly
-			$width: 100%;
-			height: calc(#{$width} / 1.7);
+			width: 280px;
+			height: calc(280 / 1.7);
 		}
 
 		.play-icon-container {
