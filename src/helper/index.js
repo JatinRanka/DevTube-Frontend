@@ -1,5 +1,6 @@
 import { LIKED_VIDEOS, WATCH_LATER } from '../constants';
 import { fetchApi } from './fetchApi';
+import { toast } from './toast';
 
 export const isVideoInPlaylist = ({ videoId: videoIdToCheck, playlist }) => {
 	const { listOfVideos } = playlist;
@@ -67,4 +68,5 @@ export const handleLogoutUser = (history, setIsUserLoggedIn) => {
 	localStorage.clear();
 	setIsUserLoggedIn(false);
 	redirectToHomePage(history);
+	toast({ type: 'success', message: 'Logout successful.' });
 };
