@@ -4,6 +4,7 @@ import { SET_VIDEOS, useVideosContext } from '../../context/videos';
 import Loader from 'react-loader-spinner';
 import { fetchApi } from '../../helper/fetchApi';
 import './index.scss';
+import { toast } from '../../helper/toast';
 
 const HomePage = () => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +23,7 @@ const HomePage = () => {
 				}
 			});
 		} catch (error) {
-			console.log(error);
+			toast({ type: 'error', message: error.message });
 		} finally {
 			setIsLoading(false);
 		}

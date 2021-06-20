@@ -31,9 +31,9 @@ const playListReducer = (state, action) => {
 		}
 
 		case ADD_PLAYLIST: {
-			const { name, listOfVideos } = payload;
+			const { _id, name, listOfVideos } = payload;
 			const newPlaylist = {
-				_id: faker.datatype.uuid(),
+				_id,
 				name,
 				listOfVideos
 			};
@@ -125,7 +125,6 @@ const playListReducer = (state, action) => {
 					)
 				};
 
-				console.log({ updatedPlaylist });
 				return updatedPlaylist;
 			});
 

@@ -1,6 +1,10 @@
-import { LIKED_VIDEOS, WATCH_LATER } from '../constants';
+import { DEFAULT_PLAYLISTS, LIKED_VIDEOS, WATCH_LATER } from '../constants';
 import { fetchApi } from './fetchApi';
 import { toast } from './toast';
+
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
+TimeAgo.addDefaultLocale(en);
 
 export const isVideoInPlaylist = ({ videoId: videoIdToCheck, playlist }) => {
 	const { listOfVideos } = playlist;
@@ -27,6 +31,9 @@ export const checkIsVideoInWatchLater = ({ videoId: videoIdToCheck, playlists = 
 	const playlist = getWatchLaterPlaylist({ playlists });
 	return playlist?.listOfVideos?.find((video) => videoIdToCheck === video._id);
 };
+
+export const canDeletePlaylist = (playlistCategory) =>
+	!DEFAULT_PLAYLISTS.includes(playlistCategory);
 
 export const doesVideoExistsInAnyPlaylist = ({
 	videoId: videoIdToCheck,
@@ -69,4 +76,9 @@ export const handleLogoutUser = (history, setIsUserLoggedIn) => {
 	setIsUserLoggedIn(false);
 	redirectToHomePage(history);
 	toast({ type: 'success', message: 'Logout successful.' });
+};
+
+export const getTimeAgo = (time) => {
+	const timeAgo = new TimeAgo('en-US');
+	return timeAgo.format(new Date(time), 'round');
 };

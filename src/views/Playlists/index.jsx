@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { usePlaylistContext, DELETE_PLAYLIST } from '../../context/playlist';
-import { getYoutubeThumbnail } from '../../helper';
+import { canDeletePlaylist, getYoutubeThumbnail } from '../../helper';
 import { fetchApi } from '../../helper/fetchApi';
 import { toast } from '../../helper/toast';
 import './index.scss';
@@ -28,6 +28,13 @@ const PlaylistsPage = () => {
 			event.preventDefault();
 
 			console.log(event.target);
+
+			const playlistCategory = event.target?.attributes?.getNamedItem(
+				'data-playlistCategory'
+			)?.value;
+
+			if (!canDeletePlaylist(playlistCategory))
+				throw new Error('Cannot delete default playlists.');
 
 			const playlistId = event.target?.attributes?.getNamedItem('data-playlistId')
 				?.value;
@@ -86,6 +93,7 @@ const PlaylistsPage = () => {
 								<p className="heading-5">{playlist.name}</p>
 								<button
 									data-playlistId={playlist._id}
+									data-playlistCategory={playlist.category}
 									onClick={handleDeletePlaylist}
 									className="btn primary-btn icon-only-btn icon-only-btn-sm delete-btn"
 								>

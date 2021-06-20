@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player/youtube';
 import { Link } from 'react-router-dom';
-import { buildYoutubeVideoUrl } from '../../helper';
+import { buildYoutubeVideoUrl, getTimeAgo } from '../../helper';
 import './index.scss';
+
+const CHANNEL_LOGO_PLACEHOLDER =
+	'https://www.pngix.com/pngfile/big/270-2709413_default-avatar-profile-picture-placeholder-round-hd-png.png';
 
 const getCalculatedWidth = () => (window.innerWidth < 500 ? window.innerWidth : 300);
 const getCalculatedHeight = (width) => width / 1.7;
@@ -33,7 +36,7 @@ const VideoCard = ({ videoDetails }) => {
 		};
 	}, []);
 
-	const { _id, title, youtubeId, postedBy } = videoDetails;
+	const { _id, title, youtubeId, postedBy, createdAt } = videoDetails;
 	const url = buildYoutubeVideoUrl(youtubeId);
 
 	const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -66,7 +69,7 @@ const VideoCard = ({ videoDetails }) => {
 				<div className="video-card__details">
 					<div className="channel-logo">
 						<img
-							src="https://yt3.ggpht.com/ytc/AAUvwnh53ZRIGnyzC28QrfuggCINb3cfNbNWo4Uc6qR9=s100-c-k-c0x00ffffff-no-rj"
+							src={postedBy.image || CHANNEL_LOGO_PLACEHOLDER}
 							alt={title}
 						/>
 					</div>
@@ -74,7 +77,7 @@ const VideoCard = ({ videoDetails }) => {
 					<div className="description">
 						<h3 className="video-card__description-title">{title}</h3>
 						<span className="video-card__description-small-text">
-							{postedBy.name} | 302K Views | 4 days ago
+							{postedBy.name} | 302K Views | {getTimeAgo(createdAt)}
 						</span>
 					</div>
 				</div>

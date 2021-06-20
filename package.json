@@ -6,6 +6,7 @@
   "dependencies": {
     "axios": "0.21.1",
     "faker": "^5.5.1",
+    "javascript-time-ago": "^2.3.7",
     "miragejs": "0.1.41",
     "node-sass": "^4.9.0",
     "react": "17.0.2",

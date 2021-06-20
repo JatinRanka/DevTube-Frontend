@@ -69,7 +69,7 @@ const SignUp = () => {
 							Name
 						</label>
 
-						<span className="input-container__icon material-icons">
+						<span className="input-container__icon material-icons-outlined">
 							perm_identity
 						</span>
 					</div>
@@ -91,8 +91,8 @@ const SignUp = () => {
 							E-Mail
 						</label>
 
-						<span className="input-container__icon material-icons">
-							perm_identity
+						<span className="input-container__icon material-icons-outlined">
+							email
 						</span>
 					</div>
 
@@ -115,7 +115,9 @@ const SignUp = () => {
 							Password
 						</label>
 
-						<span className="input-container__icon material-icons">lock</span>
+						<span className="input-container__icon material-icons-outlined">
+							lock
+						</span>
 					</div>
 
 					<button

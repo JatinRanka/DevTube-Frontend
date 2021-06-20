@@ -48,8 +48,8 @@ const NavBar = () => {
 				>
 					<p>{isUserLoggedIn ? 'Logout' : 'Login'} </p>
 
-					<button class="btn account-btn primary-btn icon-only-btn">
-						<span class="icon material-icons"> account_circle </span>
+					<button className="btn account-btn primary-btn icon-only-btn">
+						<span className="icon material-icons"> account_circle </span>
 					</button>
 				</div>
 			</div>

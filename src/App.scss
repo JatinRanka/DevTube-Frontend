@@ -7,8 +7,10 @@
 	directly manipulating component library	values
 */
 .input-container__input-field,
+.input-container__input-field:focus,
 .input-container:focus {
 	color: white;
+	border-color: white;
 }
 
 .input-container__input-field:focus ~ .input-container__heading {

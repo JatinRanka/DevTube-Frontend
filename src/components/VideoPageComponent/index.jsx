@@ -10,7 +10,8 @@ import {
 	getLikedVideosPlaylist,
 	getWatchLaterPlaylist,
 	checkIsVideoInWatchLater,
-	checkIsVideoLiked
+	checkIsVideoLiked,
+	getTimeAgo
 } from '../../helper';
 import {
 	ADD_VIDEO_IN_PLAYLIST,
@@ -24,6 +25,8 @@ import './index.scss';
 import { toast } from '../../helper/toast';
 import { useUserContext } from '../../context/user';
 
+const CHANNEL_LOGO_PLACEHOLDER =
+	'https://www.pngix.com/pngfile/big/270-2709413_default-avatar-profile-picture-placeholder-round-hd-png.png';
 const MAX_VIDEOS_TO_DISPLAY_IN_LIST = 6;
 
 const LoadingComponent = () => {
@@ -61,7 +64,7 @@ const VideoPageComponent = ({ videosList }) => {
 		fetchVideo(videoId);
 	}, [videoId]);
 
-	const { title, postedBy, description, youtubeId } = videoDetails;
+	const { title, postedBy, description, youtubeId, createdAt } = videoDetails;
 	const url = buildYoutubeVideoUrl(youtubeId);
 
 	const {
@@ -185,7 +188,7 @@ const VideoPageComponent = ({ videosList }) => {
 
 						<div className="content">
 							<p className="title">{title}</p>
-							<p className="views">302K Views</p>
+							<p className="views">{getTimeAgo(createdAt)}</p>
 
 							<div className="video-action-buttons">
 								{videoActionButtons.map((videoActionButton, index) => {
@@ -225,7 +228,7 @@ const VideoPageComponent = ({ videosList }) => {
 									<img
 										className="channel-logo"
 										alt={postedBy.name}
-										src="https://yt3.ggpht.com/ytc/AAUvwnh53ZRIGnyzC28QrfuggCINb3cfNbNWo4Uc6qR9=s100-c-k-c0x00ffffff-no-rj"
+										src={postedBy.image || CHANNEL_LOGO_PLACEHOLDER}
 									/>
 									<div className="channel">
 										<p className="channel-name">{postedBy.name}</p>
