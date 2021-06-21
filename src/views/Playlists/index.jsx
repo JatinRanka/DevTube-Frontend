@@ -27,8 +27,6 @@ const PlaylistsPage = () => {
 		try {
 			event.preventDefault();
 
-			console.log(event.target);
-
 			const playlistCategory = event.target?.attributes?.getNamedItem(
 				'data-playlistCategory'
 			)?.value;
@@ -38,8 +36,6 @@ const PlaylistsPage = () => {
 
 			const playlistId = event.target?.attributes?.getNamedItem('data-playlistId')
 				?.value;
-
-			console.log({ playlistId });
 
 			const { playlist, message } = await fetchApi({
 				url: `/playlists/${playlistId}`,

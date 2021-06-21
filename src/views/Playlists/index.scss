@@ -22,6 +22,10 @@
 
 	.delete-btn {
 		border: none;
+
+		* {
+			pointer-events: none;
+		}
 	}
 
 	.thumbnail-inner-container {

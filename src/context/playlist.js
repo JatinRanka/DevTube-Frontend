@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useReducer } from 'react';
-import faker from 'faker';
 import { LIKED_VIDEOS } from '../constants';
 
 export const SET_PLAYLISTS = 'SET_PLAYLISTS';

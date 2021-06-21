@@ -79,6 +79,7 @@ export const handleLogoutUser = (history, setIsUserLoggedIn) => {
 };
 
 export const getTimeAgo = (time) => {
+	if (!time) return '';
 	const timeAgo = new TimeAgo('en-US');
 	return timeAgo.format(new Date(time), 'round');
 };
