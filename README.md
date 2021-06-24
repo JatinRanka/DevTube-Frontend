@@ -14,4 +14,4 @@ https://github.com/JatinRanka/devtube-backend
 
 ## Demo
 
-dev-tube.netlify.app/
+https://dev-tube.netlify.app
