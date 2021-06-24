@@ -1,4 +1,4 @@
-# DevTube
+# DevTube - YouTube for Developers
 
 A video streaming application.
 
@@ -7,6 +7,10 @@ A video streaming application.
 -   Playlist management
 -   Like videos
 -   Save to watch later
+
+## Backend 
+
+https://github.com/JatinRanka/devtube-backend
 
 ## Demo
 
