@@ -8,7 +8,7 @@ export const useVideosContext = () => {
 	return useContext(VideoContext);
 };
 
-const videoReducer = (state, action) => {
+export const videoReducer = (state, action) => {
 	const { type, payload } = action;
 
 	switch (type) {
@@ -26,7 +26,7 @@ const videoReducer = (state, action) => {
 	}
 };
 
-const videoProviderInitialState = {
+export const videoProviderInitialState = {
 	videosList: []
 };
 

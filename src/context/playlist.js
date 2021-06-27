@@ -15,7 +15,7 @@ export const usePlaylistContext = () => {
 	return useContext(PlayListContext);
 };
 
-const playListReducer = (state, action) => {
+export const playListReducer = (state, action) => {
 	const { type, payload } = action;
 	const { playlists } = state;
 
@@ -140,7 +140,7 @@ const playListReducer = (state, action) => {
 	}
 };
 
-const playListProviderInitialState = {
+export const playListProviderInitialState = {
 	playlists: []
 };
 
