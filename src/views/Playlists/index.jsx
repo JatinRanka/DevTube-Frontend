@@ -32,10 +32,12 @@ const PlaylistsPage = () => {
 			)?.value;
 
 			if (!canDeletePlaylist(playlistCategory))
-				throw new Error('Cannot delete default playlists.');
+				throw new Error('Cannot delete default playlists. Only user created playlists can be deleted.');
 
 			const playlistId = event.target?.attributes?.getNamedItem('data-playlistId')
 				?.value;
+
+			if (!playlistId) throw new Error("Some error occurred. Please try again after some time")
 
 			const { playlist, message } = await fetchApi({
 				url: `/playlists/${playlistId}`,
