@@ -1,0 +1,48 @@
+.navbar {
+	background-color: #222222;
+	border-bottom: solid 1px #353535;
+
+	.menu-btn {
+		background-color: transparent;
+		color: var(--primary-text-color);
+		outline: transparent;
+		box-shadow: none;
+		border: none;
+		display: flex;
+		align-items: center;
+	}
+
+	.menu-icon {
+		font-size: 2rem;
+		margin-right: 0.5rem;
+		cursor: pointer;
+	}
+
+	.navbar__logo {
+		text-decoration: none;
+		color: var(--primary-text-color);
+	}
+
+	.navbar__link-active {
+		border-bottom: solid 4px white;
+		font-size: 1.1em;
+	}
+
+	.account-container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		column-gap: 0.5rem;
+		cursor: pointer;
+	}
+
+	.account-btn {
+		background-color: transparent;
+		border: none;
+	}
+
+	.account-btn:hover {
+		color: var(--primary-text-color);
+		background-color: transparent;
+	}
+}
