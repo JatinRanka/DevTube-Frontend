@@ -4,7 +4,7 @@ import * as axios from 'axios';
 jest.mock('axios');
 
 describe('Fetch API helper functions', () => {
-	it('Check if fetch api returns response data', async () => {
+	it('Check if fetch api returns proper response data', async () => {
 		axios.mockResolvedValue({ data: { name: 'test', age: 10 } });
 
 		const responseData = await fetchApi({ url: '', isProtected: false });
